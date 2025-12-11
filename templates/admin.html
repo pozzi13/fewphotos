@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Административная панель</h2>
+
+<h3>Заказы</h3>
+{% if orders %}
+    <table>
+        <thead>
+        <tr>
+            <th>ID заказа</th>
+            <th>Пользователь</th>
+            <th>Статус</th>
+            <th>Сумма</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.user.full_name }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ "%.2f"|format(order.total_amount) }} ₽</td>
+                <td>
+                    <form method="post" action="{{ url_for('admin_set_order_status', order_id=order.id) }}">
+                        <select name="status">
+                            <option value="new" {% if order.status == "new" %}selected{% endif %}>new</option>
+                            <option value="in_progress" {% if order.status == "in_progress" %}selected{% endif %}>in_progress</option>
+                            <option value="done" {% if order.status == "done" %}selected{% endif %}>done</option>
+                        </select>
+                        <button type="submit" class="btn btn-secondary btn-sm">Сохранить</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Заказов нет.</p>
+{% endif %}
+
+<h3>Услуги</h3>
+{% if services %}
+    <table>
+        <thead>
+        <tr>
+            <th>ID услуги</th>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Активна</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for service in services %}
+            <tr>
+                <td>{{ service.id }}</td>
+                <td>{{ service.title }}</td>
+                <td>{{ "%.2f"|format(service.price) }} ₽</td>
+                <td>{{ "да" if service.is_active else "нет" }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Услуг нет.</p>
+{% endif %}
+
+{% endblock %}

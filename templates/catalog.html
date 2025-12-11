@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Каталог услуг</h2>
+
+{% if services %}
+    <div class="cards-grid">
+        {% for service in services %}
+            <article class="service-card">
+                <div class="service-header">
+                    <h3 class="service-title">{{ service.title }}</h3>
+                    <div class="service-price">{{ "%.2f"|format(service.price) }} ₽</div>
+                </div>
+                <p class="service-desc">{{ service.description }}</p>
+                <a href="{{ url_for('add_to_cart', service_id=service.id) }}"
+                   class="btn btn-primary btn-full">
+                    Добавить в корзину
+                </a>
+            </article>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>Доступные услуги не найдены.</p>
+{% endif %}
+
+{% endblock %}

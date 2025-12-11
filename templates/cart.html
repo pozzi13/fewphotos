@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Корзина</h2>
+
+{% if services %}
+    <table>
+        <thead>
+        <tr>
+            <th>Услуга</th>
+            <th>Цена</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for service in services %}
+            <tr>
+                <td>{{ service.title }}</td>
+                <td>{{ "%.2f"|format(service.price) }} ₽</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="table-footer">
+        Итого: {{ "%.2f"|format(total) }} ₽
+    </div>
+
+    <form method="post" action="{{ url_for('checkout') }}">
+        <button type="submit" class="btn btn-primary btn-full">Оформить заказ</button>
+    </form>
+{% else %}
+    <p>Корзина пуста.</p>
+{% endif %}
+
+{% endblock %}
