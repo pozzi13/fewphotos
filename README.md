@@ -1,6 +1,7 @@
 # FewPhotos
 
 Photo gallery web application built with Flask.
+
 Demo SQLite database with sample images is included.
 
 ## Features
