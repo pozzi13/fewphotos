@@ -18,3 +18,9 @@ Demo SQLite database with sample images is included.
 - HTML
 - CSS
 - SQLite
+
+## Screenshots
+
+![Gallery](templates/gallery.png)
+![Main](templates/main.png)
+![Edit](templates/edit.png)
