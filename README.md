@@ -23,4 +23,4 @@ Demo SQLite database with sample images is included.
 
 ![Gallery](templates/gallery.png)
 ![Main](templates/main.png)
-![Edit](templates/edit.png)
+![Login](templates/login.png)
